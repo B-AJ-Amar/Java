@@ -2,8 +2,10 @@
 import java.util.Date;
 import java.util.Arrays;
 import java.util.Scanner;
-
-
+import java.io.File;
+import java.io.IOException;  // Import the IOException class to handle errors
+import java.io.FileWriter;
+import java.io.FileNotFoundException;
 //? like "int main()" in c , in java we have to make class Main contains main function (it must be public and static )
 public class  Main {
     public static void main(String[] args){
@@ -100,7 +102,7 @@ public class  Main {
         
 
         // *4 Loops and conditions =====================================================
-            //  LOOPS :
+            // ?  LOOPS :
                 // ? for :
                     for (int j = 0; j < 10; j++) {
                         // do something
@@ -112,7 +114,7 @@ public class  Main {
                     }
 
                
-            // CONDITIONS :
+            // ? CONDITIONS :
                 // ? if ,else ...:
                     int var;
 
@@ -207,6 +209,101 @@ public class  Main {
             input.close();
 
         // *7 Math =======================================================================
+                    Math.max(5, 10); // returns 10
+                    Math.min(5, 10); // returns 5
+                    Math.sqrt(64); // returns 8
+                    Math.abs(-4.7); // returns 4.7
+                    Math.pow(5, 2); // returns 25
+                    Math.exp(2); // returns 7.38905609893065
+                    Math.random(); // returns a random number between 0 and 1
 
+                    // ? round , floor , ceil
+                    Math.round(2.6); // returns 3
+                    Math.floor(2.6); // returns 2
+                    Math.ceil(2.6); // returns 3
+
+                    // ? some constants :
+                    // Math.PI; // returns 3.141592653589793    
+                    // Math.E ;// returns 2.718281828459045        
+
+        // *8 Exceptions =======================================================================
+            // ? try to execute the code in the try block, if an error occurs, jump to the catch block , if no error occurs, skip the catch block ,finally execute the code in the finally block
+            // ? exemple :
+                try  {
+                    System.out.println("try test");
+                    
+                } catch(Exception e){
+                    if (e instanceof IOException) {
+                        System.out.println("do this if the Exeptation 'IOException' happend ");
+                    } else {
+                        System.out.println("eny other exeptation");
+                    }
+                    e.printStackTrace(); // ? prints the error message
+                } finally{
+                    System.out.println("finally");
+                }
+
+        // *9 Files =======================================================================
+            // import java.io.File;  // Import the File class
+            File myFile = new File("test.txt"); // Specify the filename
+            // ? some methods :
+                myFile.canRead(); // returns true if the file can be read
+                myFile.canWrite(); // returns true if the file can be written to
+                myFile.canExecute(); // returns true if the file can be executed
+                myFile.exists(); // returns true if the file exists
+                myFile.getName(); // returns the name of the file
+                myFile.getAbsolutePath(); // returns the absolute pathname of the file
+                myFile.length(); // returns the size of the file in bytes
+                myFile.isDirectory(); // returns true if the file is a directory
+                myFile.isFile(); // returns true if the file is a file (not a directory)
+                myFile.lastModified(); // returns the time the file was last modified
+            // ? CRUD :
+            
+                // ? file creation :
+                try {
+                    File myObj = new File("filename.txt");
+                    myObj.createNewFile(); // If file already exists, the method returns false
+                    System.out.println("File created: " + myObj.getName());
+                    
+                } catch (IOException e) {
+                    System.out.println("ERROR !");
+                    e.printStackTrace(); // prints the error message
+                }
+                // ? file reading :
+                try {
+                    File myObj = new File("filename.txt");
+                    Scanner myReader = new Scanner(myObj);
+                    while (myReader.hasNextLine()) {
+                    String data = myReader.nextLine();
+                    System.out.println(data);
+                    }
+                    myReader.close();
+                } catch (FileNotFoundException e) {
+                    System.out.println("ERROR !");
+                    e.printStackTrace();
+                }
+                // ? file writing :
+                    // import java.io.FileWriter;   // ! you should impot this
+                    try {
+                        FileWriter myWriter = new FileWriter("filename.txt");
+                        myWriter.write("this is a text for test \n");
+                        myWriter.close();
+                        System.out.println("Successfully wrote to the file.");
+                    } catch (IOException e) {
+                        System.out.println("ERROR !");
+                        e.printStackTrace();
+                    }
+                // ? file deletion :
+                    try {
+                        File myObj = new File("filename.txt");
+                        myObj.delete(); // returns true if the file was deleted successfully
+                
+                    } catch (Exception e) {
+                        System.out.println("ERROR !");
+                        e.printStackTrace();
+                    }
+                  // ! note : try and catch are used to handle exceptions, and they are not required.
+            
     }
+    // TODO : OOP
 }
